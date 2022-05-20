@@ -1,11 +1,9 @@
 import { GlobalStyles } from './styles/GlobalStyles';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
-import { CSSTransition } from 'react-transition-group';
 
 import { Navbar } from './components/Navbar';
 import { NavItem } from './components/Navbar/NavItem';
-// import { Dropdown } from './components/Navbar/Dropdown';
 import { Dropdown } from './components/Navbar/Dropdown';
 
 import { AiOutlinePlus } from 'react-icons/ai';
