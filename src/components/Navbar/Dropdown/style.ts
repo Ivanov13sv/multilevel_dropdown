@@ -10,9 +10,7 @@ export const Dropdown = styled.div`
 	border-radius: ${({ theme }) => theme.other.border_radius};
 	padding: 1rem;
 	overflow: hidden;
-	height: 130px;
 	transition: .3s all;
-
 	* > {
 	}
 `;

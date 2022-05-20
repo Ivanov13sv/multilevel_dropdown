@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useState, useRef, useEffect } from 'react';
 
 import * as S from './style';
 import { DropdownItem } from './DropdownItem';
@@ -11,16 +11,29 @@ interface DropdownProps {
 
 export const Dropdown: FC<DropdownProps> = ({ children }) => {
 	const [activeMenu, setActiveMenu] = useState('main');
+	const [height, setHeight] = useState<number>();
 
-	const firstRef = useRef<HTMLDivElement>(null);
-	const secondRef = useRef<HTMLDivElement>(null);
-	const height =
-		activeMenu === 'main' ? firstRef.current?.clientHeight : secondRef.current?.clientHeight;
+	const mainMenuRef = useRef<HTMLDivElement>(null);
+	const secondMenuRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const getHeight = () => {
+			setHeight(
+				activeMenu === 'main'
+					? mainMenuRef.current?.clientHeight
+					: secondMenuRef.current?.clientHeight
+			);
+		};
+		getHeight();
+	}, [activeMenu]);
 
 	return (
 		<S.Dropdown style={{ height: height && height + 35 }}>
-			<S.MainMenu active={activeMenu === 'main'} ref={firstRef}>
+			<S.MainMenu active={activeMenu === 'main'} ref={mainMenuRef}>
 				<DropdownItem>My profile</DropdownItem>
+				<DropdownItem>My profile</DropdownItem>
+
+
 				<DropdownItem
 					goToMenu="settings"
 					setActiveMenu={setActiveMenu}
@@ -31,19 +44,21 @@ export const Dropdown: FC<DropdownProps> = ({ children }) => {
 				</DropdownItem>
 			</S.MainMenu>
 
-			<S.SecondaryMenu ref={secondRef} active={activeMenu === 'settings'}>
+			<S.SecondaryMenu ref={secondMenuRef} active={activeMenu === 'settings'}>
 				<DropdownItem
 					setActiveMenu={setActiveMenu}
 					goToMenu="main"
 					leftIcon={<BiChevronRight style={{ transform: 'rotate(180deg)' }} />}
 				></DropdownItem>
-				<DropdownItem>Test</DropdownItem>
-				<DropdownItem>Test</DropdownItem>
-				<DropdownItem>Test</DropdownItem>
-				<DropdownItem>Test</DropdownItem>
-				<DropdownItem>Test</DropdownItem>
-				<DropdownItem>Test</DropdownItem>
-				<DropdownItem>Test</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
+				<DropdownItem>Settings</DropdownItem>
 			</S.SecondaryMenu>
 		</S.Dropdown>
 	);
