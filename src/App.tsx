@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { GlobalStyles } from './styles/GlobalStyles';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
+import { CSSTransition } from 'react-transition-group';
+
+import { Navbar } from './components/Navbar';
+import { NavItem } from './components/Navbar/NavItem';
+// import { Dropdown } from './components/Navbar/Dropdown';
+import { Dropdown } from './components/Navbar/Dropdown';
+
+import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineBell } from 'react-icons/ai';
+import { AiOutlineMessage } from 'react-icons/ai';
+import { FaAngleDown } from 'react-icons/fa';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<ThemeProvider theme={theme}>
+			<Navbar>
+				<NavItem icon={<AiOutlinePlus />} />
+				<NavItem icon={<AiOutlineBell />} />
+				<NavItem icon={<AiOutlineMessage />} />
+
+				<NavItem icon={<FaAngleDown />}>
+					<Dropdown />
+				</NavItem>
+			</Navbar>
+			<GlobalStyles />
+		</ThemeProvider>
+	);
 }
 
 export default App;
